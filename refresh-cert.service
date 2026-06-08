@@ -7,7 +7,7 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 ExecCondition=bash -c '! openssl x509 -in /etc/ssl/private/$(hostname -f).crt -checkend $((42 * 86400)) -noout 2>/dev/null'
-ExecStart=/usr/local/src/renew-ca/client.sh --auto
+ExecStart=/usr/local/bin/refresh-cert --auto
 StandardOutput=journal
 StandardError=journal
 
