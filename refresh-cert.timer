@@ -1,0 +1,13 @@
+# /etc/systemd/system/wifi-cert-renew.timer
+[Unit]
+Description=Periodic WiFi certificate renewal
+Documentation=man:systemd.timer(5)
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=7d
+Persistent=true
+RandomizedDelaySec=1h
+
+[Install]
+WantedBy=timers.target

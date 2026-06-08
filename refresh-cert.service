@@ -1,0 +1,15 @@
+# /etc/systemd/system/wifi-cert-renew.service
+[Unit]
+Description=Renew WiFi machine certificate
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecCondition=bash -c '! openssl x509 -in /etc/ssl/private/$(hostname -f).crt -checkend $((42 * 86400)) -noout 2>/dev/null'
+ExecStart=/usr/local/src/renew-ca/client.sh --auto
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
