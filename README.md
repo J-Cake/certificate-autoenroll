@@ -9,6 +9,13 @@ The script operates in two modes:
 1. Manual mode - The administrator logs in to the CA via standard SSH flows. The credential flow is currrently hard-coded into the script. Alter if needed. The script autopopulates an SSH command to enable this. The server is executed, returning a valid certificate
 2. Automatic mode - The SSH server is configured to trust certificates it has issued. If the client attempts to log in by presenting its certificate, the SSH server will use information encoded in previously issued certificates to invoke the `server.py` script as the `machine-enroll` user, thereby issuing a certificate.
 
+Manual mode is invoked by simply executing the script and entering required credentials.
+```
+/usr/local/bin/refresh-cert/
+```
+
+Automatic mode simply requires the `--auto` flag. The provided `.service` file includes this.
+
 # Security
 
 The security of this system rests on the assumtion that the SSH server is a privileged operation. Users who can connect to the server via SSH can issue themselves a certificate. Depending on the power of such a certificate, this can be a highly sensitive operation.
